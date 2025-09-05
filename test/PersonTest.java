@@ -19,9 +19,6 @@ class PersonTest {
     }
 
     @Test
-    void getID() {}
-
-    @Test
     void getIDseed() {
         assertEquals(4, Person.getIDseed());
     }
