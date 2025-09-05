@@ -1,4 +1,5 @@
 import java.util.Calendar;
+import java.util.Objects;
 
 public class Person {
 
@@ -18,17 +19,14 @@ public class Person {
         return title + " " + lastName;
     }
 
-    public String getAge() {
-        int age = 2025 - YOB;
+    public String getAge(int year) {
+        int age = year - YOB;
         return Integer.toString(age);
     }
 
-    public String getAge(int year)
+    public String getSpecifiedAge()
     {
-        Calendar calendar = Calendar.getInstance();
-        year =  calendar.get(Calendar.YEAR);
-        int age = year - YOB;
-        return Integer.toString(age);
+        return Integer.toString(Calendar.getInstance().get(Calendar.YEAR) - YOB);
     }
 
     public String toCSV()
@@ -145,5 +143,17 @@ public class Person {
                 ", title='" + title + '\'' +
                 ", YOB=" + YOB +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return YOB == person.YOB && Objects.equals(IDnum, person.IDnum) && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(title, person.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(IDnum, firstName, lastName, title, YOB);
     }
 }

@@ -31,13 +31,13 @@ class PersonTest {
 
     @Test
     void getIDnum() {
-        assertEquals("00000A", p1.getIDseed());
+        assertEquals("00000A", p1.getIDnum());
     }
 
     @Test
     void setIDnum() {
         p1.setIDnum("00000B");
-        assertEquals("00000B", p1.getIDseed());
+        assertEquals("00000B", p1.getIDnum());
     }
 
     @Test
@@ -85,6 +85,39 @@ class PersonTest {
     }
 
     @Test
+    void getAge() {
+        assertEquals("70", p1.getAge(2025));
+    }
+
+    @Test
+    void getSpecifiedAge() {
+        assertEquals("70", p1.getSpecifiedAge());
+    }
+
+    @Test
+    void toCSV() {
+        assertEquals("00000A,Bob,Tester1,Mr.,1955", p1.toCSV());
+    }
+
+    @Test
+    void toJSON() {
+        assertEquals("{\"IDNum\":\"00000A\", \"firstName\":\"Bob\", \"lastName\":\"Tester1\", \"title\":\"Mr.\", \"YOB\":\"1955\"}", p1.toJSON());
+    }
+
+    @Test
+    void testToXML() {
+        assertEquals("<Person><IDNum>00000A</IDNum><firstName>Bob</firstName><lastName>Tester1</lastName><title>Mr.</title><YOB>1955</YOB></Person>", p1.toXML());
+    }
+
+    @Test
     void testToString() {
+    }
+
+    @Test
+    void testEquals() {
+    }
+
+    @Test
+    void testHashCode() {
     }
 }
