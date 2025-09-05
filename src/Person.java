@@ -48,7 +48,7 @@ public class Person {
 
     public String toXML()
     {
-        String hello;
+        String goodbye;
         String retString = "";
         retString = "<Person>";
         retString += "<IDNum>" + IDnum + "</IDNum>";
