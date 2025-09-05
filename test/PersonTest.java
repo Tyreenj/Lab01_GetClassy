@@ -17,7 +17,7 @@ class PersonTest {
         p5 = new Person("Fred", "Tester5", "Mr..", 1970);
         p6 = new Person("Cindy", "Tester6", "Mrs.", 1975);
     }
-123
+
     @Test
     void getIDseed() {
         assertEquals(4, Person.getIDseed());
