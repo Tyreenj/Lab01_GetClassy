@@ -16,7 +16,7 @@ public class Person {
     }
 
     public String formalName() {
-        return title + " " + lastName;
+        return title + " " + fullName();
     }
 
     public String getAge(int year) {

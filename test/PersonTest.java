@@ -110,6 +110,16 @@ class PersonTest {
     }
 
     @Test
+    void testFullName() {
+        assertEquals("Bob Tester1", p1.fullName());
+    }
+
+    @Test
+    void testFormalName() {
+        assertEquals("Mr. Bob Tester1", p1.formalName());
+    }
+
+    @Test
     void testToString() {
     }
 

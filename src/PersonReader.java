@@ -19,6 +19,7 @@ import javax.swing.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.nio.file.StandardOpenOption.CREATE;
@@ -33,6 +34,7 @@ public class PersonReader {
         target = target.resolve("src");
         // set the chooser to the project src directory
         chooser.setCurrentDirectory(target.toFile());
+        ArrayList<Person> people = new ArrayList<>();
 
         try  // Code that might trigger the exception goes here
         {
@@ -42,27 +44,28 @@ public class PersonReader {
 
                 inFile = new Scanner(target);
 
-                out.printf("%-10s %-15s %-15s %-10s %13s%n", "ID#", "Firstname", "Lastname", "Title", "YOB");
+                out.printf("%-10s %-15s %-15s %-10s %9s%n", "ID#", "Firstname", "Lastname", "Title", "YOB");
                 out.println("====================================================================");
 
                 while (inFile.hasNextLine()) {
                     line = inFile.nextLine();
-                    String regex = "[,\\.\\s]";
+                    String regex = ",|\\r?\\n";
                     String[] myArray = line.split(regex);
-                    for (int j = 0; j < myArray.length/10; j++) {
-                        for (int i = 0; i < myArray.length;) {
-                            out.printf("%-6s", myArray[i]);
-                            out.printf("%-5s", myArray[i + 1]);
-                            out.printf("%-11s", myArray[i + 2]);
-                            out.printf("%-5s", myArray[i + 3]);
-                            out.printf("%-10s", myArray[i + 4]);
-
-                            i = i + 5;
-                        }
-                        out.println();
-                    }
+                    Person person = new Person(myArray[0], myArray[1], myArray[2], myArray[3], Integer.parseInt(myArray[4]));
+                    people.add(person);
+//"%-10s %-15s %-15s %-16s %s%n"
 
                 }
+
+                for (Person p : people) {
+                    out.printf("%-10s %-15s %-15s %-16s %s%n", p.getIDnum(), p.getFirstName(), p.getLastName(), p.getTitle(), p.getYOB());
+
+                }
+
+                for (int j = 0; j < people.size()/5; j++) {
+                    out.println();
+                }
+
 
                 inFile.close();
             } else   // User did not pick a file, closed the chooser

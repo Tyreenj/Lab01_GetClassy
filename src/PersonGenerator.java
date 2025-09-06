@@ -11,12 +11,12 @@ public class PersonGenerator {
 
     public static void main(String[] args) {
 
-        ArrayList<String> people = new ArrayList<String>();
+        ArrayList<Person> Person = new ArrayList<Person>();
         boolean done = false;
         Scanner in  = new Scanner(System.in);
 
         File workingDirectory = new File(System.getProperty("user.dir"));
-        Path file = Paths.get(workingDirectory.getPath() + "\\src\\PersonTestData.txt");
+        Path file = Paths.get(workingDirectory.getPath() + "\\src\\PersonTestData.csv");
 
         /*
         a. ID (a String)
@@ -39,15 +39,17 @@ public class PersonGenerator {
             LastName = SafeInput.getNonZeroLenString(in, "Enter your Last Name: ");
             Title = SafeInput.getNonZeroLenString(in, "Enter your Title. [Mr, Mrs, Ms, etc]: ");
             YOB = SafeInput.getRangedInt(in, "Enter your Year of Birth: ", 1000, 9999);
+            Person newPerson = new Person(ID, FirstName, LastName, Title, YOB);
+            Person.add(newPerson);
 
-            personRec = ID + ", " + FirstName + ", " + LastName + ", " + Title + ", " + YOB;
-            people.add(personRec);
+           // personRec = ID + ", " + FirstName + ", " + LastName + ", " + Title + ", " + YOB;
+          //  people.add(personRec);
 
             done = SafeInput.getYNConfirm(in, "Are you done?: ");
 
         } while (!done);
 
-        for(String p: people) {
+        for(Person p: Person) {
             System.out.println(p);
         }
 
@@ -62,9 +64,9 @@ public class PersonGenerator {
 
             // Finally can write the file LOL!
 
-            for(String rec : people)
+            for(Person p : Person)
             {
-                writer.write(rec, 0, rec.length());  // stupid syntax for write rec
+                writer.write(p.toCSV());  // stupid syntax for write rec
                 // 0 is where to start (1st char) the write
                 // rec. length() is how many chars to write (all)
                 writer.newLine();  // adds the new line
