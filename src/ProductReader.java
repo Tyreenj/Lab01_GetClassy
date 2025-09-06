@@ -28,7 +28,7 @@ public class ProductReader {
 
                 inFile = new Scanner(target);
 
-                out.printf("%-10s %-20s %-10s %s%n", "Name", "Description", "ID", "Cost");
+                out.printf("%-10s %-25s %-10s %s%n", "Name", "Description", "ID", "Cost");
                 out.println("====================================================================");
 
                 while (inFile.hasNextLine()) {
@@ -43,7 +43,7 @@ public class ProductReader {
                 }
 
                 for (Product p : products) {
-                    out.printf("%-10s %-20s %-10s %s%n", p.getName(), p.getDescription(), p.getProductID(), p.getCost());
+                    out.printf("%-10s %-25s %-10s %s%n", p.getName(), p.getDescription(), p.getProductID(), p.getCost());
 
                 }
 
