@@ -40,7 +40,7 @@ public class ProductWriter {
         Double Cost = 0.0;
 
         do {
-            Name = SafeInput.getNonZeroLenString(in, "Enter your product Name. [6 Digits]");
+            Name = SafeInput.getNonZeroLenString(in, "Enter your product Name");
             Description = SafeInput.getNonZeroLenString(in, "Enter your product description");
             ID = SafeInput.getNonZeroLenString(in, "Enter your product ID");
             Cost = SafeInput.getDouble(in, "Enter your Cost");
