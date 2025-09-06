@@ -11,29 +11,54 @@ public class Person {
     static private int IDseed = 1;
 
 
+    /**
+     * Returns the person's full name
+     * @return the person's full name
+     */
     public String fullName() {
         return firstName + " " + lastName;
     }
 
+    /**
+     * Returns the person's title and their full name
+     * @return the person's title and their full name
+     */
     public String formalName() {
         return title + " " + fullName();
     }
 
+    /**
+     * @param year the current year inputted to compute age
+     * Returns the person's age year
+     * @return the person's age given a year
+     */
     public String getAge(int year) {
         int age = year - YOB;
         return Integer.toString(age);
     }
 
+    /**
+     * Returns the person's age according to current date
+     * @return the person's age according to current date
+     */
     public String getSpecifiedAge()
     {
         return Integer.toString(Calendar.getInstance().get(Calendar.YEAR) - YOB);
     }
 
+    /**
+     * Returns the person's data in CSV format
+     * @return the person's data in CSV format
+     */
     public String toCSV()
     {
         return IDnum + "," + firstName + "," + lastName + "," + title + "," + YOB;
     }
 
+    /**
+     * Returns the person's data in JSON format
+     * @return the person's data in JSON format
+     */
     public String toJSON()
     {
         String retString = "";
@@ -46,6 +71,10 @@ public class Person {
         return retString;
     }
 
+    /**
+     * Returns the person's data in XML format
+     * @return the person's data in XML format
+     */
     public String toXML()
     {
         String retString = "";
@@ -62,6 +91,7 @@ public class Person {
     public static int getIDseed() {
         return IDseed;
     }
+
 
     public static void setIDseed(int IDseed) {
         Person.IDseed = IDseed;

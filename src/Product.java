@@ -10,6 +10,7 @@ public class Product {
         return name;
     }
 
+
     public Product(String name, String description, String productID, double cost) {
         this.name = name;
         this.description = description;
@@ -44,12 +45,19 @@ public class Product {
     public void setCost(double cost) {
         this.cost = (double) cost;
     }
-
+    /**
+     * Returns the product's data in CSV format
+     * @return the product's data in CSV format
+     */
     public String toCSV()
     {
         return name + "," + description + "," + productID + "," + cost;
     }
 
+    /**
+     * Returns the product's data in JSON format
+     * @return the product's data in JSON format
+     */
     public String toJSON()
     {
         String retString = "";
@@ -61,6 +69,10 @@ public class Product {
         return retString;
     }
 
+    /**
+     * Returns the product's data in XML format
+     * @return the product's data in XML format
+     */
     public String toXML()
     {
         String retString = "";
