@@ -20,12 +20,12 @@ public class ProductWriter {
 
          */
 
-        ArrayList<String> products = new ArrayList<String>();
+        ArrayList<Product> products = new ArrayList<Product>();
         boolean done = false;
         Scanner in  = new Scanner(System.in);
 
         File workingDirectory = new File(System.getProperty("user.dir"));
-        Path file = Paths.get(workingDirectory.getPath() + "\\src\\ProductTestData.txt");
+        Path file = Paths.get(workingDirectory.getPath() + "\\src\\ProductTestData.csv");
 
         /*
         a.	ID (a String as before in Person)
@@ -34,26 +34,25 @@ public class ProductWriter {
         d.	Cost (This is currency so it will be a Java double)
         */
 
-        String productRec = "";
         String ID = "";
         String Name = "";
         String Description = "";
         Double Cost = 0.0;
 
         do {
-            ID = SafeInput.getNonZeroLenString(in, "Enter your ID. [6 Digits]: ");
-            Name = SafeInput.getNonZeroLenString(in, "Enter your Name: ");
-            Description = SafeInput.getNonZeroLenString(in, "Enter your Description: ");
-            Cost = SafeInput.getDouble(in, "Enter your Cost: ");
+            Name = SafeInput.getNonZeroLenString(in, "Enter your product Name. [6 Digits]");
+            Description = SafeInput.getNonZeroLenString(in, "Enter your product description");
+            ID = SafeInput.getNonZeroLenString(in, "Enter your product ID");
+            Cost = SafeInput.getDouble(in, "Enter your Cost");
 
-            productRec = ID + ", " + Name + ", " + Description + ", " + Cost;
-            products.add(productRec);
+            Product newProduct = new Product(Name, Description, ID, Cost);
+            products.add(newProduct);
 
             done = SafeInput.getYNConfirm(in, "Are you done?: ");
 
         } while (!done);
 
-        for(String p: products) {
+        for(Product p: products) {
             System.out.println(p);
         }
 
@@ -68,9 +67,9 @@ public class ProductWriter {
 
             // Finally can write the file LOL!
 
-            for(String rec : products)
+            for(Product p : products)
             {
-                writer.write(rec, 0, rec.length());  // stupid syntax for write rec
+                writer.write(p.toCSV());  // stupid syntax for write rec
                 // 0 is where to start (1st char) the write
                 // rec. length() is how many chars to write (all)
                 writer.newLine();  // adds the new line

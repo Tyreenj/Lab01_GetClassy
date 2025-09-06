@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.System.out;
@@ -16,6 +17,8 @@ public class ProductReader {
         target = target.resolve("src");
         // set the chooser to the project src directory
         chooser.setCurrentDirectory(target.toFile());
+        ArrayList<Product> products = new ArrayList<Product>();
+
 
         try  // Code that might trigger the exception goes here
         {
@@ -25,7 +28,7 @@ public class ProductReader {
 
                 inFile = new Scanner(target);
 
-                out.printf("%-10s %-15s %-15s %14s%n", "ID#", "Name", "Description", "Cost");
+                out.printf("%-10s %-20s %-10s %s%n", "Name", "Description", "ID", "Cost");
                 out.println("====================================================================");
 
                 while (inFile.hasNextLine()) {
@@ -33,14 +36,19 @@ public class ProductReader {
                     //out.printf(line);
                     String regex = ",|\\r?\\n";
                     String[] myArray = line.split(regex);
+                    Product product = new Product(myArray[0], myArray[1], myArray[2], Double.parseDouble(myArray[3]));
+                    products.add(product);
                     //out.println(myArray[0] + myArray[1] + myArray[2] + myArray[3]);
-                    if (myArray.length >= 4) {
-                        out.printf("%-9s %-15s %-25s %s%n", myArray[0], myArray[1], myArray[2], myArray[3]);
-                    }
-                    for (int j = 0; j < myArray.length/10; j++) {
-                        out.println();
-                    }
 
+                }
+
+                for (Product p : products) {
+                    out.printf("%-10s %-20s %-10s %s%n", p.getName(), p.getDescription(), p.getProductID(), p.getCost());
+
+                }
+
+                for (int j = 0; j < products.size()/4; j++) {
+                    out.println();
                 }
 
                 inFile.close();
