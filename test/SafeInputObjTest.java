@@ -10,7 +10,7 @@ class SafeInputObjTest {
 
     @BeforeEach
     void setUp() {
-        String simulatedInput = "Hello\n5\nY\nABC123\n";
+        String simulatedInput = "Hello\n1\nY\nABC123\n4\n";
         Scanner scanner = new Scanner(simulatedInput);
         input = new SafeInputObj(scanner);
     }
@@ -20,43 +20,52 @@ class SafeInputObjTest {
 
         String result = input.getNonZeroLenString("Enter your string");
         assertEquals("Hello",  result);
-    }
-
-    @Test
-    void getRangedInt() {
-        int result = input.getInt("Enter any int");
-        assertEquals(5, result);
+        System.out.println(result);
     }
 
     @Test
     void getInt() {
-        int result = input.getRangedInt("Enter ranged int", 1, 20);
-        assertEquals(5, result);
+        int result = input.getInt("Enter any int");
+        assertEquals(1, result);
+        System.out.println(result);
     }
 
     @Test
-    void getRangedDouble() {
-        double result = input.getDouble("Enter any double");
-        assertEquals(5, result, 0.001);
+    void getRangedInt() {
+        int result = input.getRangedInt("Enter ranged int", 1, 20);
+        assertEquals(1, result);
+        System.out.println(result);
     }
 
     @Test
     void getDouble() {
-        boolean result = input.getYNConfirm("Are you sure?");
-        assertTrue(result);
+        double result = input.getDouble("Enter any double");
+        assertEquals(1, result, 0.001);
+        System.out.println(result);
     }
 
     @Test
     void getYNConfirm() {
-        String result = input.getRegExString("Enter code", "[A-Z]{3}\\d{3}");
-        assertEquals("ABC123", result);
+        boolean result = input.getYNConfirm("Are you sure?");
+        assertTrue(result);
+        System.out.println(result);
     }
 
     @Test
     void getRegExString() {
+        Scanner scanner = new Scanner("ABC123\n");
+        input = new SafeInputObj(scanner);
+        String result = input.getRegExString("Enter code", "[A-Z]{3}\\d{3}");
+        assertEquals("ABC123", result);
+        System.out.println(result);
+    }
+
+    @Test
+    void getRangedDouble() {
         Scanner scanner = new Scanner("1.5\n");
         input = new SafeInputObj(scanner);
-        double result = input.getRangedDouble("Enter ranged double", 1, 2);
+        double result = input.getRangedDouble("Enter ranged double", 1, 6);
         assertEquals(1.5, result, 0.001);
+        System.out.println(result);
     }
 }
